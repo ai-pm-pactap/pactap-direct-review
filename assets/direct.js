@@ -399,6 +399,7 @@
     }
     setText('pd-summary-size', assisted ? 'Format & dimensions to confirm' : ['width', 'gusset', 'height'].some(key => result.errors[key]) ? 'Complete dimensions' : v.width + ' × ' + v.gusset + ' × ' + v.height + ' mm');
     setText('pd-summary-quantity', result.errors.quantity ? 'Enter quantity' : v.quantity.toLocaleString(root.dataset.locale || 'en') + ' bags');
+    setText('pd-brief-preview', result.valid ? v.quantity.toLocaleString(root.dataset.locale || 'en') + ' bags · ' + v.city : 'Add your quantity and delivery details.');
     setText('pd-summary-destination', v.city ? [v.city, v.emirate, v.postal, v.country].filter(Boolean).join(', ') : 'Add your delivery location');
     setText('pd-summary-material', assisted ? 'Material & print to confirm' : ['paper', 'gsm', 'print'].some(key => result.errors[key]) ? 'Complete material details' : papers[v.paper] + ' · ' + v.gsm + ' GSM · ' + printing[v.print]);
     setText('pd-summary-planning', [timings[v.timing], frequencies[v.frequency]].filter(label => label && label !== 'Not specified').join(' · ') || 'Not specified');

@@ -71,8 +71,8 @@
     function panel(u, v, side, inside = false) {
       const envelope = Math.sin(u * Math.PI);
       const foot = Math.min(1, v * 16), edge = Math.min(u, 1 - u);
-      const crease = -(type === 'sos' ? .045 : .035) * Math.exp(-Math.pow((v - (type === 'sos' ? .20 : .25) - .008 * envelope - .01 * u) * 25, 2)) * envelope * foot;
-      const diagonal = -(type === 'sos' ? .041 : .026) * Math.exp(-Math.pow((v - .22 + .7 * edge) * 38, 2))
+      const crease = -(type === 'sos' ? .022 : .016) * Math.exp(-Math.pow((v - (type === 'sos' ? .20 : .25) - .008 * envelope - .01 * u) * 25, 2)) * envelope * foot;
+      const diagonal = -(type === 'sos' ? .021 : .015) * Math.exp(-Math.pow((v - .22 + .7 * edge) * 38, 2))
         * Math.exp(-Math.pow(edge / .29, 4)) * Math.min(1, edge * 14) * foot;
       const relaxed = envelope * Math.sin(v * Math.PI);
       const bow = (type === 'sos' ? .034 : .018) * (1 + side * .13) * relaxed;
@@ -281,6 +281,7 @@
     #endif
     uniform mediump mat4 uModel;
     uniform sampler2D uPaper;
+    uniform float uCameraDistance;
     varying mediump vec3 vNormal;
     varying mediump vec3 vPosition;
     varying mediump vec3 vObject;
@@ -307,11 +308,11 @@
       float variation = 0.94 + grain * 0.12 + (formation - 0.5) * 0.035;
       vec3 kraft = vec3(0.65, 0.50, 0.33) * variation * vTone;
       vec3 ambient = mix(vec3(0.67, 0.63, 0.55), vec3(0.79, 0.80, 0.78), n.y * 0.5 + 0.5);
-      vec3 illumination = ambient * 0.72 + vec3(1.0, 0.96, 0.88) * diffuse * 0.61
-        + vec3(0.87, 0.93, 1.0) * bounce * 0.25 + vec3(0.93, 0.98, 1.0) * max(dot(n, rim), 0.0) * 0.09;
-      vec3 view = normalize(vec3(0.0, 0.0, 5.7) - vPosition);
+      vec3 illumination = ambient * 0.58 + vec3(1.0, 0.96, 0.88) * diffuse * 0.75
+        + vec3(0.87, 0.93, 1.0) * bounce * 0.20 + vec3(0.93, 0.98, 1.0) * max(dot(n, rim), 0.0) * 0.11;
+      vec3 view = normalize(vec3(0.0, 0.0, uCameraDistance) - vPosition);
       float sheen = pow(max(dot(n, normalize(light + view)), 0.0), mix(12.0, 6.0, formation));
-      vec3 color = kraft * illumination + vec3(0.010, 0.009, 0.007) * sheen;
+      vec3 color = kraft * illumination + vec3(0.016, 0.014, 0.011) * sheen;
       gl_FragColor = vec4(pow(max(color, vec3(0.0)), vec3(0.85)), 1.0);
     }`;
 
@@ -362,6 +363,7 @@
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.uniformMatrix4fv(locations.model, false, model);
+        gl.uniform1f(locations.cameraDistance, distance);
         gl.uniformMatrix4fv(locations.mvp, false, multiply(projection, multiply(view, model)));
         gl.drawArrays(gl.TRIANGLES, 0, mesh.vertices.length / 7);
         // Validate the first frame; context-loss events handle runtime GPU failure without per-frame readbacks.
@@ -444,8 +446,8 @@
         gl.enableVertexAttribArray(attribute);
         gl.vertexAttribPointer(attribute, size, gl.FLOAT, false, 28, offset);
       });
-      locations = { model: gl.getUniformLocation(program, 'uModel'), mvp: gl.getUniformLocation(program, 'uMVP') };
-      if (locations.model === null || locations.mvp === null) throw new Error('Uniform unavailable');
+      locations = { model: gl.getUniformLocation(program, 'uModel'), mvp: gl.getUniformLocation(program, 'uMVP'), cameraDistance: gl.getUniformLocation(program, 'uCameraDistance') };
+      if (Object.values(locations).some(value => value === null)) throw new Error('Uniform unavailable');
       gl.enable(gl.DEPTH_TEST); gl.clearColor(0, 0, 0, 0);
       if (!render()) return null;
       const bounds = canvas.getBoundingClientRect();
