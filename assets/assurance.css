@@ -1,0 +1,42 @@
+.pd-assurances { --assurance-text:#f4f7f2; --assurance-muted:#c1d1c7; --assurance-rule:#ffffff26; padding:48px 0 28px; background:radial-gradient(ellipse at 0 0,#244837,transparent 65%),#152a23; color:var(--assurance-text); border-top:2px solid var(--accent,#3c936c); }
+.pd-assurance-heading { display:flex; align-items:center; justify-content:space-between; gap:32px; padding-bottom:28px; border-bottom:1px solid var(--assurance-rule); }
+.pd .pd-assurance-eyebrow { margin:0 0 12px; color:var(--assurance-muted); font-size:11px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; }
+.pd .pd-assurance-heading h2 { color:var(--assurance-text); font-size:32px; font-weight:500; letter-spacing:-.035em; line-height:1.2; margin:0; text-wrap:balance; }
+.pd-assurance-heading button { display:flex; align-items:center; justify-content:center; gap:12px; min-height:44px; padding:10px 16px; border:1px solid #ffffff45; border-radius:3px; background:transparent; color:var(--assurance-muted); font:inherit; font-size:12px; cursor:pointer; white-space:nowrap; transition:background .2s,color .2s; }
+.pd-assurance-heading button[hidden] { display:none; }
+.pd-assurance-heading button:hover { background:#ffffff0d; color:var(--assurance-text); }
+.pd .pd-assurances :focus-visible { outline-color:#bddcc9; }
+.pd-assurance-window { overflow:hidden; }
+.pd-assurance-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; list-style:none; padding:36px 0; margin:0; }
+.pd-assurance-list[aria-hidden=true] { display:none; }
+.pd-assurance-list li { position:relative; display:flex; align-items:center; gap:24px; min-width:0; }
+.pd-assurance-icon { display:grid; place-items:center; width:64px; height:80px; flex:0 0 64px; color:#bddcc9; }
+.pd-assurance-icon svg { display:block; width:64px; height:64px; }
+.pd-assurance-list li>div { min-width:0; }
+.pd .pd-assurance-list h3 { max-width:23ch; color:var(--assurance-text); font-size:22px; font-weight:500; letter-spacing:-.025em; line-height:1.3; margin:0 0 12px; text-wrap:balance; }
+.pd-assurance-list h3>span { margin-left:2px; font-size:12px; vertical-align:super; }
+.pd .pd-assurance-list p { font-size:14px; line-height:1.65; color:var(--assurance-muted); margin:0; }
+.pd .pd-assurance-terms { font-size:12px; line-height:1.7; color:var(--assurance-muted); margin:0; padding-top:20px; border-top:1px solid var(--assurance-rule); }
+.pd-assurance-terms a { text-decoration:underline; text-underline-offset:3px; }
+.pd-assurances[data-animated=true] .pd-assurance-window { mask-image:linear-gradient(to right,transparent,#000 2%,#000 98%,transparent); }
+.pd-assurances[data-animated=true] .pd-assurance-track { display:flex; width:max-content; animation:pd-assurance-travel 56s linear infinite; animation-play-state:paused; }
+.pd-assurances[data-animated=true] .pd-assurance-list { display:flex; gap:0; flex:none; }
+.pd-assurances[data-animated=true] .pd-assurance-list li { width:464px; padding-right:48px; }
+.pd-assurances[data-animated=true] .pd-assurance-list li::after { content:""; position:absolute; right:24px; top:4px; bottom:4px; width:1px; background:var(--assurance-rule); }
+.pd-assurances[data-running=true] .pd-assurance-track { animation-play-state:running; }
+.pd-assurances:focus-within:not([data-resumed=true]) .pd-assurance-track { animation-play-state:paused; }
+@media(hover:hover) { .pd-assurances:hover:not([data-resumed=true]) .pd-assurance-track { animation-play-state:paused; } }
+@keyframes pd-assurance-travel { to { transform:translateX(-50%); } }
+@media(max-width:1000px) { .pd-assurance-list { grid-template-columns:1fr; gap:28px; } }
+@media(max-width:800px) {
+  .pd-assurances { padding-block:32px 24px; }
+  .pd-assurances[data-animated=true] .pd-assurance-list li { width:min(360px,calc(100vw - 36px)); padding-right:28px; }
+  .pd-assurances[data-animated=true] .pd-assurance-list li::after { right:14px; }
+  .pd-assurance-list li { gap:16px; }
+  .pd-assurance-icon { width:48px; height:64px; flex-basis:48px; }
+  .pd-assurance-icon svg { width:48px; height:48px; }
+  .pd .pd-assurance-list h3 { font-size:20px; }
+  .pd-assurance-heading { gap:12px; flex-wrap:wrap; }
+  .pd .pd-assurance-heading h2 { font-size:27px; }
+}
+@media(prefers-reduced-motion:reduce) { .pd-assurances .pd-assurance-track { animation:none!important; transform:none!important; } }
