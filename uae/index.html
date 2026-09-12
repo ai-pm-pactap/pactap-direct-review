@@ -25,7 +25,7 @@
           </summary>
           <nav aria-label="Choose destination market"><p class="pd-market-heading">Your delivery destination</p><a href="/pactap-direct-review/"><span class="pd-market-code">ALL</span><span>Global</span><span class="pd-market-unit">On quote</span><span class="pd-market-check" aria-hidden="true">✓</span></a><a href="/pactap-direct-review/in/"><span class="pd-market-code">IN</span><span>India</span><span class="pd-market-unit">INR</span><span class="pd-market-check" aria-hidden="true">✓</span></a><a href="/pactap-direct-review/uae/" aria-current="page"><span class="pd-market-code">AE</span><span>UAE</span><span class="pd-market-unit">AED</span><span class="pd-market-check" aria-hidden="true">✓</span></a><a href="/pactap-direct-review/us/"><span class="pd-market-code">US</span><span>United States</span><span class="pd-market-unit">USD</span><span class="pd-market-check" aria-hidden="true">✓</span></a><p class="pd-market-help">Choose where your order will be delivered.</p></nav>
         </details>
-        <a href="#pd-engine" class="pd-button pd-button-small">Get LIVE pricing <span aria-hidden="true">↗</span></a>
+        <a href="#pd-engine" class="pd-button pd-button-small">Preview DDP pricing <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </header>
@@ -36,10 +36,10 @@
           <p class="pd-pricing-hook"><span>Live DDP pricing</span><small>Preview</small></p>
           <h1>Your packaging.<br>Priced to your <span>doorstep.</span></h1>
           <p class="pd-hero-description">Plan your packaging order in the UAE. Add your quantity and destination for a delivered quote in AED.</p>
-          <div class="pd-hero-actions"><a class="pd-button" href="#pd-engine">Get LIVE pricing <span aria-hidden="true">↗</span></a><a class="pd-text-link" href="#pd-bags">Explore products <span aria-hidden="true">↓</span></a></div>
+          <div class="pd-hero-actions"><a class="pd-button" href="#pd-engine">Preview DDP pricing <span aria-hidden="true">↗</span></a><a class="pd-text-link" href="#pd-bags">Explore products <span aria-hidden="true">↓</span></a></div>
           <p class="pd-hero-footnote"><strong>Product + shipping + applicable taxes &amp; duties.</strong><br>Live pricing is not connected yet.</p>
         </div>
-        <div class="pd-product-stage pd-sourcing-stage" aria-label="Global and local sourcing with current Pactap products">
+        <div class="pd-product-stage pd-sourcing-stage" aria-label="Delivery destinations with current Pactap products">
           <figure class="pd-shipping" data-route-view="all" aria-labelledby="pd-shipping-title">
   <svg id="pd-shipping-map" class="pd-shipping-map" viewBox="0 0 720 290" aria-hidden="true" focusable="false">
     <defs><radialGradient id="pd-map-wash"><stop stop-color="#3c936c" stop-opacity=".19"/><stop offset=".58" stop-color="#3c936c" stop-opacity=".08"/><stop offset="1" stop-color="#3c936c" stop-opacity="0"/></radialGradient></defs>
@@ -51,35 +51,30 @@
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M378 60 C408 18 472 38 516 116"/>
         <circle class="pd-route-origin" cx="378" cy="60" r="2.5"/>
-        <text class="pd-route-global-label" x="378" y="44" text-anchor="middle">Europe</text>
         <g class="pd-route-marker" transform="translate(516 116)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="516" cy="116" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M164 82 C286 -8 439 -2 516 116"/>
         <circle class="pd-route-origin" cx="164" cy="82" r="2.5"/>
-        <text class="pd-route-global-label" x="164" y="66" text-anchor="middle">North America</text>
         <g class="pd-route-marker" transform="translate(516 116)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="516" cy="116" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M584 104 C566 63 531 72 516 116"/>
         <circle class="pd-route-origin" cx="584" cy="104" r="2.5"/>
-        <text class="pd-route-global-label" x="603" y="95" text-anchor="middle">East Asia</text>
         <g class="pd-route-marker" transform="translate(516 116)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="516" cy="116" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M432 162 C463 174 499 148 516 116"/>
         <circle class="pd-route-origin" cx="432" cy="162" r="2.5"/>
-        <text class="pd-route-global-label" x="419" y="182" text-anchor="middle">East Africa</text>
         <g class="pd-route-marker" transform="translate(516 116)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="516" cy="116" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M628 214 C614 154 554 124 516 116"/>
         <circle class="pd-route-origin" cx="628" cy="214" r="2.5"/>
-        <text class="pd-route-global-label" x="635" y="233" text-anchor="middle">Australia</text>
         <g class="pd-route-marker" transform="translate(516 116)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="516" cy="116" r="10"/>
       </g>
@@ -116,42 +111,36 @@
       <g class="pd-route-lane" data-sourcing="global" data-origin="india">
         <path class="pd-route-path" d="M516 116 C507 78 482 82 468 112"/>
         <circle class="pd-route-origin" cx="516" cy="116" r="3"/>
-        <text class="pd-route-global-label" x="538" y="136" text-anchor="middle">India</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M378 60 C402 30 442 48 468 112"/>
         <circle class="pd-route-origin" cx="378" cy="60" r="2.5"/>
-        <text class="pd-route-global-label" x="378" y="44" text-anchor="middle">Europe</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M164 82 C286 4 412 12 468 112"/>
         <circle class="pd-route-origin" cx="164" cy="82" r="2.5"/>
-        <text class="pd-route-global-label" x="164" y="66" text-anchor="middle">North America</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M584 104 C550 48 495 59 468 112"/>
         <circle class="pd-route-origin" cx="584" cy="104" r="2.5"/>
-        <text class="pd-route-global-label" x="603" y="95" text-anchor="middle">East Asia</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M432 162 C451 162 466 140 468 112"/>
         <circle class="pd-route-origin" cx="432" cy="162" r="2.5"/>
-        <text class="pd-route-global-label" x="419" y="182" text-anchor="middle">East Africa</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M628 214 C608 151 519 122 468 112"/>
         <circle class="pd-route-origin" cx="628" cy="214" r="2.5"/>
-        <text class="pd-route-global-label" x="635" y="233" text-anchor="middle">Australia</text>
         <g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="468" cy="112" r="10"/>
       </g>
@@ -188,42 +177,36 @@
       <g class="pd-route-lane" data-sourcing="global" data-origin="india">
         <path class="pd-route-path" d="M516 116 C402 4 259 2 164 82"/>
         <circle class="pd-route-origin" cx="516" cy="116" r="3"/>
-        <text class="pd-route-global-label" x="538" y="136" text-anchor="middle">India</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M378 60 C300 8 218 12 164 82"/>
         <circle class="pd-route-origin" cx="378" cy="60" r="2.5"/>
-        <text class="pd-route-global-label" x="378" y="44" text-anchor="middle">Europe</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M584 104 C458 -16 280 -12 164 82"/>
         <circle class="pd-route-origin" cx="584" cy="104" r="2.5"/>
-        <text class="pd-route-global-label" x="603" y="95" text-anchor="middle">East Asia</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M628 214 C492 250 308 200 164 82"/>
         <circle class="pd-route-origin" cx="628" cy="214" r="2.5"/>
-        <text class="pd-route-global-label" x="635" y="233" text-anchor="middle">Australia</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M260 210 C222 190 183 139 164 82"/>
         <circle class="pd-route-origin" cx="260" cy="210" r="2.5"/>
-        <text class="pd-route-global-label" x="253" y="228" text-anchor="middle">South America</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
       <g class="pd-route-lane" data-sourcing="global">
         <path class="pd-route-path" d="M432 162 C352 183 240 136 164 82"/>
         <circle class="pd-route-origin" cx="432" cy="162" r="2.5"/>
-        <text class="pd-route-global-label" x="419" y="182" text-anchor="middle">East Africa</text>
         <g class="pd-route-marker" transform="translate(164 82)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g>
         <circle class="pd-route-arrival" cx="164" cy="82" r="10"/>
       </g>
@@ -262,7 +245,7 @@
 <g class="pd-route-lane" data-sourcing="global" data-origin="india"><path class="pd-route-path" d="M516 116 C507 76 484 83 468 112"/><g class="pd-route-marker" transform="translate(468 112)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g><circle class="pd-route-arrival" cx="468" cy="112" r="10"/><text class="pd-route-global-label" x="468" y="99" text-anchor="middle">UAE</text></g>
 <g class="pd-route-lane" data-sourcing="global" data-origin="india"><path class="pd-route-path" d="M516 116 C570 123 611 156 628 214"/><g class="pd-route-marker" transform="translate(628 214)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g><circle class="pd-route-arrival" cx="628" cy="214" r="10"/><text class="pd-route-global-label" x="635" y="234" text-anchor="middle">Australia</text></g>
 <g class="pd-route-lane" data-sourcing="global" data-origin="india"><path class="pd-route-path" d="M516 116 C481 160 456 180 432 162"/><g class="pd-route-marker" transform="translate(432 162)"><circle class="pd-packet-halo" r="5"/><circle class="pd-packet-core" r="2.2"/></g><circle class="pd-route-arrival" cx="432" cy="162" r="10"/><text class="pd-route-global-label" x="410" y="181" text-anchor="middle">East Africa</text></g>
-      <circle class="pd-route-origin" cx="516" cy="116" r="4"/><text class="pd-route-country" x="528" y="120">INDIA · SOURCING</text>
+      <circle class="pd-route-origin" cx="516" cy="116" r="4"/>
     </g>
     </g>
   </svg>
@@ -284,22 +267,22 @@
   </div>
   <figcaption>
     <div class="pd-network-bar">
-      <strong id="pd-shipping-title">UAE sourcing</strong>
+      <strong id="pd-shipping-title">Delivery to UAE</strong>
       <details class="pd-source-menu" data-route-filters hidden>
-        <summary aria-label="Sourcing view: All sources"><span data-route-current>All sources</span></summary>
-        <div class="pd-route-filters" role="group" aria-label="Explore illustrative sourcing routes">
-          <button type="button" data-route-filter="all" aria-pressed="true" aria-controls="pd-shipping-map">All sources</button>
-          <button type="button" data-route-filter="global" aria-pressed="false" aria-controls="pd-shipping-map">International</button>
-          <button type="button" data-route-filter="local" aria-pressed="false" aria-controls="pd-shipping-map" aria-label="Domestic sourcing within UAE">Domestic</button>
+        <summary aria-label="Map view: Network"><span data-route-current>Map view</span></summary>
+        <div class="pd-route-filters" role="group" aria-label="Explore illustrative delivery maps">
+          <button type="button" data-route-filter="all" aria-pressed="true" aria-controls="pd-shipping-map">Network</button>
+          <button type="button" data-route-filter="global" aria-pressed="false" aria-controls="pd-shipping-map">World</button>
+          <button type="button" data-route-filter="local" aria-pressed="false" aria-controls="pd-shipping-map" aria-label="Country map detail: UAE">Country detail</button>
         </div>
       </details>
       <button type="button" class="pd-route-toggle" data-route-toggle hidden>Pause motion</button>
     </div>
-    <ol class="pd-domestic-key" data-destination="in" aria-label="Illustrative domestic origins in India"><li><span>1</span>Delhi</li><li><span>2</span>Ahmedabad</li><li><span>3</span>Bengaluru</li></ol>
-    <ol class="pd-domestic-key" data-destination="uae" aria-label="Illustrative domestic origins in UAE"><li><span>1</span>Abu Dhabi</li><li><span>2</span>Dubai</li><li><span>3</span>Al Ain</li></ol>
-    <ol class="pd-domestic-key" data-destination="us" aria-label="Illustrative domestic origins in United States"><li><span>1</span>Los Angeles</li><li><span>2</span>Chicago</li><li><span>3</span>New York</li></ol>
-    <p class="pd-route-context" data-route-context aria-live="polite" aria-atomic="true">Across borders. Within UAE. One delivery destination.</p>
-    <p class="pd-shipping-note">Routes are illustrative, not live tracking or factory locations. Availability is confirmed with your quote.</p>
+    <ol class="pd-domestic-key" data-destination="in" aria-label="Illustrative map locations in India"><li><span>1</span>Delhi</li><li><span>2</span>Ahmedabad</li><li><span>3</span>Bengaluru</li></ol>
+    <ol class="pd-domestic-key" data-destination="uae" aria-label="Illustrative map locations in UAE"><li><span>1</span>Abu Dhabi</li><li><span>2</span>Dubai</li><li><span>3</span>Al Ain</li></ol>
+    <ol class="pd-domestic-key" data-destination="us" aria-label="Illustrative map locations in United States"><li><span>1</span>Los Angeles</li><li><span>2</span>Chicago</li><li><span>3</span>New York</li></ol>
+    <p class="pd-route-context" data-route-context aria-live="polite" aria-atomic="true">Illustrative delivery network. Availability is confirmed with your quote.</p>
+    <p class="pd-shipping-note">Illustrative map, not live tracking or confirmed delivery coverage. Availability is confirmed with your quote.</p>
   </figcaption>
 </figure>
 
@@ -351,10 +334,11 @@
           <div class="pd-engine-top"><div><span class="pd-engine-mark" aria-hidden="true">DDP</span><strong>Start with paper bags</strong></div><span class="pd-status"><span aria-hidden="true"></span> Pricing connection pending</span></div>
           <div class="pd-engine-grid">
             <form id="pd-configurator" class="pd-configurator" aria-label="Prepare your packaging requirement">
+              <input type="hidden" name="preference" value="">
               <div id="pd-error-summary" class="pd-error-summary" tabindex="-1" role="alert" aria-labelledby="pd-error-title" hidden><strong id="pd-error-title">A few details to check</strong><ul></ul></div>
               
               <fieldset class="pd-entry-path"><legend>How would you like to start?</legend><label><input type="radio" id="pd-mode" name="mode" value="assisted" checked aria-describedby="pd-error-mode"><span><strong>Help me choose</strong><small>Tell us what you’ll pack.</small></span></label><label><input type="radio" name="mode" value="detailed" aria-describedby="pd-error-mode"><span><strong>I know my specification</strong><small>Choose a format and size.</small></span></label><span class="pd-field-error" id="pd-error-mode"></span></fieldset>
-              <fieldset data-assisted-only><div class="pd-field"><label for="pd-purpose">What will you pack or carry?</label><input type="text" id="pd-purpose" name="purpose" required maxlength="300" list="pd-use-examples" placeholder="e.g. takeaway meals for two outlets" aria-describedby="pd-error-purpose pd-purpose-help"><datalist id="pd-use-examples"><option value="Takeaway meals"><option value="Bakery items"><option value="Retail purchases"><option value="Groceries"></datalist><span class="pd-field-error" id="pd-error-purpose"></span><small id="pd-purpose-help">Choose an example or describe your own. No technical details needed.</small></div></fieldset>
+              <fieldset data-assisted-only><div class="pd-field"><label for="pd-purpose">What will you pack or carry?</label><input type="text" id="pd-purpose" name="purpose" required maxlength="300" list="pd-use-examples" placeholder="e.g. takeaway meals for two outlets" aria-describedby="pd-error-purpose pd-purpose-help"><datalist id="pd-use-examples"><option value="Takeaway meals"><option value="Bakery items"><option value="Retail purchases"><option value="Groceries"></datalist><span class="pd-field-error" id="pd-error-purpose"></span><small id="pd-purpose-help">Choose an example or describe your own. No technical details needed.</small></div><p class="pd-preference-note" id="pd-preference-note" hidden>Preferred: <strong id="pd-preference-name"></strong><button type="button" data-clear-preference>Clear preference</button></p></fieldset>
               <fieldset class="pd-bag-options" data-detail-only hidden disabled><legend><span class="pd-step">01</span> Paper bags · choose a format</legend>
                 <label class="pd-bag-option"><input type="radio" name="bag" value="twisted" checked aria-describedby="pd-error-bag"><span><img src="/pactap-direct-review/assets/images/twisted-studio-480.webp" alt="" width="480" height="480" loading="lazy"><strong>Twisted handle</strong><small>A classic carry</small></span></label>
                 <label class="pd-bag-option"><input type="radio" name="bag" value="flat" aria-describedby="pd-error-bag"><span><img src="/pactap-direct-review/assets/images/flat-studio-480.webp" alt="" width="480" height="480" loading="lazy"><strong>Flat handle</strong><small>Everyday versatility</small></span></label>
@@ -375,7 +359,8 @@
                 </div></details>
               </fieldset>
               <fieldset class="pd-specs pd-order">
-                <div class="pd-field pd-full pd-quantity"><label for="pd-quantity">Quantity required <span>bags · required</span></label><input id="pd-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="10000000" step="1" placeholder="Enter your quantity" required aria-describedby="pd-error-quantity pd-quantity-help"><span class="pd-field-error" id="pd-error-quantity"></span><small id="pd-quantity-help">Enter the quantity you need. Minimum order quantities are confirmed with your quote.</small></div>
+                <div class="pd-field pd-full pd-quantity"><label for="pd-quantity">Quantity required <span id="pd-quantity-unit">bags · required</span></label><input id="pd-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="10000000" step="1" placeholder="Enter your quantity" required aria-describedby="pd-error-quantity pd-quantity-help"><span class="pd-field-error" id="pd-error-quantity"></span><small id="pd-quantity-help">An estimate is fine. We’ll confirm quantities with your quote.</small></div>
+                <fieldset class="pd-quantity-help pd-full" data-assisted-only><label for="pd-estimate"><input id="pd-estimate" name="estimate" type="checkbox" value="yes" aria-describedby="pd-error-estimate">Help me estimate the quantity</label><span class="pd-field-error" id="pd-error-estimate"></span></fieldset>
                 <details class="pd-order-options pd-full"><summary>Timing &amp; repeat orders <span>Optional <span class="pd-disclosure-icon" aria-hidden="true">+</span></span></summary><div class="pd-specs">
                 <div class="pd-field"><label for="pd-timing">When do you need it? <span>optional</span></label><select id="pd-timing" name="timing" aria-describedby="pd-error-timing"><option value="">Select timeframe</option><option value="flexible">Flexible</option><option value="under-2-weeks">Within 2 weeks</option><option value="2-4-weeks">2–4 weeks</option><option value="1-3-months">1–3 months</option></select><span class="pd-field-error" id="pd-error-timing"></span></div>
                 <div class="pd-field"><label for="pd-frequency">Order pattern <span>optional</span></label><select id="pd-frequency" name="frequency" aria-describedby="pd-error-frequency"><option value="">Select pattern</option><option value="one-off">One-off requirement</option><option value="repeat">Repeat requirement</option><option value="unsure">Not sure yet</option></select><span class="pd-field-error" id="pd-error-frequency"></span></div>
@@ -383,7 +368,7 @@
                 </div></details>
               </fieldset>
               <fieldset class="pd-specs pd-destination"><legend>Where should we deliver? · UAE</legend>
-                <div class="pd-field "><label for="pd-city">Delivery city / locality</label><input id="pd-city" name="city" type="text" maxlength="120" placeholder="e.g. Al Quoz, Dubai" required autocomplete="address-level2" aria-describedby="pd-error-city"><span class="pd-field-error" id="pd-error-city"></span></div>
+                <div class="pd-field"><label for="pd-city">Delivery city / locality</label><input id="pd-city" name="city" type="text" maxlength="120" placeholder="e.g. Al Quoz, Dubai" required autocomplete="address-level2" aria-describedby="pd-error-city"><span class="pd-field-error" id="pd-error-city"></span></div>
                 <div class="pd-field"><label for="pd-emirate">Delivery emirate</label><select id="pd-emirate" name="emirate" required autocomplete="address-level1" aria-describedby="pd-error-emirate"><option value="">Select emirate</option><option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option><option>Ajman</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select><span class="pd-field-error" id="pd-error-emirate"></span></div>
 
                 <p class="pd-field-help pd-full">Choose your emirate and delivery locality. You don’t need a postal code for this enquiry.</p>
@@ -423,7 +408,7 @@
 
     <section class="pd-section pd-enquiry-section" id="pd-enquiry" aria-labelledby="pd-enquiry-title"><div class="pd-wrap pd-enquiry-grid">
       <div class="pd-enquiry-copy"><h2 id="pd-enquiry-title" tabindex="-1">Let’s talk <span>packaging.</span></h2><p>Have a specification ready—or just a product in mind? Tell us what you need.</p><a href="https://pactap.com/contact-us/" class="pd-text-link">Prefer to speak to us? <span aria-hidden="true">↗</span></a></div>
-      <div class="pd-lead-card"><form class="pde" data-pd-enquiry data-enquiry-preview novalidate autocomplete="off" aria-label="Enquiry validation preview">
+      <div class="pd-lead-card"><div class="pd-prepared-summary" id="pd-prepared-summary" hidden><strong>Your packaging requirement</strong><p id="pd-prepared-description"></p><button type="button" data-edit-requirement>Edit requirement <span aria-hidden="true">↗</span></button></div><form class="pde" data-pd-enquiry data-enquiry-preview novalidate autocomplete="off" aria-label="Enquiry validation preview">
   <h3>A few details to get started.</h3>
   <p class="pde-required-note">Fields marked * are required.</p>
   <p class="pde-preview-note"><strong>Preview only.</strong> Try it with test details. Nothing here is sent or saved.</p>

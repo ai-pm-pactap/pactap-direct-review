@@ -16,6 +16,10 @@
     if (!['detailed', 'assisted'].includes(value.mode)) errors.mode = 'Choose how you would like to prepare your requirement.';
     value.purpose = value.mode === 'assisted' && typeof data.purpose === 'string' ? data.purpose.trim() : '';
     if (value.mode === 'assisted' && (!value.purpose || value.purpose.length > 300 || /[\x00-\x1f\x7f]/.test(value.purpose))) errors.purpose = 'Describe what you need to pack (up to 300 characters, on one line).';
+    value.preference = value.mode === 'assisted' ? data.preference ?? '' : '';
+    if (typeof value.preference !== 'string' || (value.preference && !Object.hasOwn(bags, value.preference))) errors.preference = 'Choose a product from the current range, or clear your preference.';
+    value.estimate = data.estimate === true || data.estimate === 'yes';
+    if (![undefined, '', false, true, 'yes'].includes(data.estimate) || (value.estimate && value.mode !== 'assisted')) errors.estimate = 'Use Help me choose to estimate quantity, or enter a quantity for your specification.';
     for (const [key, choices] of Object.entries({ timing: timings, frequency: frequencies })) {
       value[key] = data[key] === undefined ? '' : data[key];
       if (typeof value[key] !== 'string' || !Object.hasOwn(choices, value[key])) errors[key] = 'Choose a supported ' + (key === 'timing' ? 'timeframe' : 'order pattern') + '.';
@@ -27,6 +31,7 @@
     }
     for (const [key, minimum, maximum] of [['width', 1, 2000], ['gusset', 1, 2000], ['height', 1, 2000], ['quantity', 1, 10000000], ['gsm', 40, 300]]) {
       if (value.mode === 'assisted' && key !== 'quantity') { value[key] = null; continue; }
+      if (key === 'quantity' && value.estimate) { value[key] = null; continue; }
       const raw = String(data[key] ?? '').trim();
       value[key] = Number(raw);
       if (!/^\d+$/.test(raw) || !Number.isSafeInteger(value[key]) || value[key] < minimum || value[key] > maximum) {
@@ -59,13 +64,13 @@
       'PACTAP DIRECT — CUSTOMER REQUIREMENT',
       'Market: ' + markets[v.market],
       'Entry path: ' + (v.mode === 'assisted' ? 'Help me choose' : 'Known specification'),
-      ...(v.mode === 'assisted' ? ['Product range: Paper bags', 'Intended use: ' + v.purpose, 'Format, dimensions, material and print: To be confirmed with the buyer'] : [
+      ...(v.mode === 'assisted' ? ['Product range: Paper bags', 'Intended use: ' + v.purpose, ...(v.preference ? ['Preferred format: ' + bags[v.preference] + ' (to confirm)'] : []), 'Format, dimensions, material and print: To be confirmed with the buyer'] : [
         'Bag: ' + bags[v.bag],
         'Dimensions (width × gusset × height): ' + v.width + ' × ' + v.gusset + ' × ' + v.height + ' mm',
         'Paper requested: ' + papers[v.paper] + ', ' + v.gsm + ' GSM',
         'Print requested: ' + printing[v.print]
       ]),
-      'Quantity: ' + v.quantity.toLocaleString('en') + ' bags',
+      'Quantity: ' + (v.estimate ? 'Help estimate — quantity to confirm' : v.quantity.toLocaleString('en') + ' bags'),
       'Requested timeframe: ' + timings[v.timing] + ' (requested need-by timeframe, not a dispatch date)',
       'Order pattern: ' + frequencies[v.frequency],
       'Delivery: ' + [v.city, v.emirate, v.postal, v.country || markets[v.market]].filter(Boolean).join(', '),
@@ -173,16 +178,16 @@
         routeLand?.setAttribute('href', view === 'local' ? routeLand.dataset.domesticSrc : routeLand.dataset.worldSrc);
         shipping.style.setProperty('--pd-route-scale', view === 'local' ? route.dataset.domesticScale : '1');
         if (routeContext) routeContext.textContent = {
-          all: root.dataset.market === 'global' ? 'India and international origins. Delivery availability is confirmed for your destination.' : 'Across borders. Within ' + markets[root.dataset.market] + '. One delivery destination.',
-          global: root.dataset.market === 'in' ? 'International sourcing across five illustrative origin regions.' : 'India and international sourcing origins. Routes are illustrative, not confirmed serviceability.',
-          local: 'Domestic sourcing within ' + markets[root.dataset.market] + ' · country detail.'
+          all: 'Illustrative delivery network. Availability is confirmed with your quote.',
+          global: 'World map. Illustrative routes, not confirmed delivery coverage.',
+          local: markets[root.dataset.market] + ' map detail. Locations are illustrative, not confirmed delivery coverage.'
         }[view];
         filters.forEach(control => control.setAttribute('aria-pressed', String(control === button)));
         const current = filterGroup.querySelector?.('[data-route-current]');
-        if (current) current.textContent = { all: 'All sources', global: 'International', local: 'Domestic' }[view];
+        if (current) current.textContent = { all: 'Map view', global: 'World', local: 'Country detail' }[view];
         filterGroup.open = false;
         const trigger = filterGroup.querySelector?.('summary');
-        trigger?.setAttribute('aria-label', 'Sourcing view: ' + ({ all: 'All sources', global: 'International', local: 'Domestic' }[view]));
+        trigger?.setAttribute('aria-label', 'Map view: ' + ({ all: 'Network', global: 'World', local: 'Country detail' }[view]));
         trigger?.focus({ preventScroll: true });
       }));
     }
@@ -379,17 +384,25 @@
   const touched = new Set();
   const errorSummary = document.getElementById('pd-error-summary');
   let summarySignature = '';
-  const fieldLabels = { market: 'Delivery market', mode: 'Specification path', purpose: 'Intended use', timing: 'Requested timeframe', frequency: 'Order pattern', bag: 'Product format', width: 'Width', gusset: 'Gusset', height: 'Height', quantity: 'Order quantity', paper: 'Paper finish', print: 'Printing', gsm: 'Paper weight', city: 'Delivery city', postal: 'Postal code', emirate: 'Emirate', country: 'Destination country' };
+  const fieldLabels = { market: 'Delivery market', mode: 'Specification path', purpose: 'Intended use', estimate: 'Quantity help', timing: 'Requested timeframe', frequency: 'Order pattern', bag: 'Product format', width: 'Width', gusset: 'Gusset', height: 'Height', quantity: 'Order quantity', paper: 'Paper finish', print: 'Printing', gsm: 'Paper weight', city: 'Delivery city', postal: 'Postal code', emirate: 'Emirate', country: 'Destination country' };
   const generatedBriefs = new WeakMap();
+  let manualBriefField = null;
   const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
 
   function update(showErrors = false) {
     const assisted = fields('mode')?.value === 'assisted';
     form.querySelectorAll('[data-detail-only]').forEach(section => { section.hidden = assisted; section.disabled = assisted; });
     form.querySelectorAll('[data-assisted-only]').forEach(section => { section.hidden = !assisted; section.disabled = !assisted; });
+    const estimating = assisted && Boolean(fields('estimate')?.checked);
+    fields('quantity').disabled = estimating;
+    fields('quantity').required = !estimating;
+    setText('pd-quantity-unit', estimating ? 'To confirm' : 'bags · required');
     const result = validateConfiguration(read());
     const v = result.value;
-    setText('pd-summary-bag', assisted ? 'Paper bags · help me choose' : bags[v.bag] || 'Choose your bag');
+    setText('pd-summary-bag', assisted ? v.preference ? bags[v.preference] + ' · preferred' : 'Paper bags · help me choose' : bags[v.bag] || 'Choose your bag');
+    const preferenceNote = document.getElementById('pd-preference-note');
+    if (preferenceNote) preferenceNote.hidden = !assisted || !v.preference;
+    setText('pd-preference-name', bags[v.preference] || '');
     const selectedImage = form.querySelector('input[name="bag"]:checked')?.closest('.pd-bag-option')?.querySelector('img');
     const summaryImage = document.querySelector('.pd-quote-product img');
     if (summaryImage) summaryImage.hidden = assisted;
@@ -398,8 +411,9 @@
       summaryImage.srcset = selectedImage.srcset || '';
     }
     setText('pd-summary-size', assisted ? 'Format & dimensions to confirm' : ['width', 'gusset', 'height'].some(key => result.errors[key]) ? 'Complete dimensions' : v.width + ' × ' + v.gusset + ' × ' + v.height + ' mm');
-    setText('pd-summary-quantity', result.errors.quantity ? 'Enter quantity' : v.quantity.toLocaleString(root.dataset.locale || 'en') + ' bags');
-    setText('pd-brief-preview', result.valid ? v.quantity.toLocaleString(root.dataset.locale || 'en') + ' bags · ' + v.city : 'Add your quantity and delivery details.');
+    const quantityLabel = v.estimate ? 'Quantity to confirm' : result.errors.quantity ? 'Enter quantity' : v.quantity.toLocaleString(root.dataset.locale || 'en') + ' bags';
+    setText('pd-summary-quantity', quantityLabel);
+    setText('pd-brief-preview', result.valid ? quantityLabel + ' · ' + v.city : 'Add your quantity and delivery details.');
     setText('pd-summary-destination', v.city ? [v.city, v.emirate, v.postal, v.country].filter(Boolean).join(', ') : 'Add your delivery location');
     setText('pd-summary-material', assisted ? 'Material & print to confirm' : ['paper', 'gsm', 'print'].some(key => result.errors[key]) ? 'Complete material details' : papers[v.paper] + ' · ' + v.gsm + ' GSM · ' + printing[v.print]);
     setText('pd-summary-planning', [timings[v.timing], frequencies[v.frequency]].filter(label => label && label !== 'Not specified').join(' · ') || 'Not specified');
@@ -410,13 +424,17 @@
     const brief = result.valid ? buildBrief(v) : '';
     const requestFields = document.querySelectorAll('[name="pd-configuration"]');
     let hasManualBrief = false;
+    manualBriefField = null;
     requestFields.forEach(field => {
       // CF7 also supports typed specifications; never overwrite a customer's edits.
-      if (field.value && field.value !== (generatedBriefs.get(field) || '')) { hasManualBrief = true; return; }
+      if (field.value && field.value !== (generatedBriefs.get(field) || '')) { hasManualBrief = true; manualBriefField = field; return; }
       field.value = brief;
       generatedBriefs.set(field, brief);
     });
     setText('pd-spec-sync-status', hasManualBrief ? 'Your edits have been kept. Check them against any changes above, or clear the specification to use the configured details again.' : '');
+    const preparedSummary = document.getElementById('pd-prepared-summary');
+    if (preparedSummary) preparedSummary.hidden = !result.valid && !hasManualBrief;
+    setText('pd-prepared-description', hasManualBrief ? 'Your brief has been edited. Review your changes before continuing.' : [assisted ? v.preference ? bags[v.preference] + ' (preferred)' : v.purpose : bags[v.bag], quantityLabel, v.city, v.country || markets[v.market]].filter(Boolean).join(' · '));
     const downloads = document.querySelectorAll('[data-download-brief]');
     downloads.forEach(button => { button.disabled = !result.valid; });
     {
@@ -463,6 +481,7 @@
   form.addEventListener('focusout', event => { if (Object.hasOwn(fieldLabels, event.target.name || '')) { touched.add(event.target.name); update(attempted); } });
   form.addEventListener('change', event => {
     invalidatePrepared();
+    if (event.target.name === 'bag' && fields('preference')) fields('preference').value = event.target.value;
     if (event.target.name === 'size-preset' && event.target.value !== 'custom') {
       if (['180x80x240', '240x100x320', '320x120x410'].includes(event.target.value)) {
         const values = event.target.value.split('x');
@@ -491,8 +510,18 @@
   });
   document.querySelectorAll('[data-bag-select]').forEach(button => button.addEventListener('click', () => {
     const option = form.querySelector('input[name="bag"][value="' + button.dataset.bagSelect + '"]');
-    if (option) { if (fields('mode')) fields('mode').value = 'detailed'; option.checked = true; invalidatePrepared(); update(attempted); option.focus({ preventScroll: true }); form.scrollIntoView({ block: 'start' }); }
+    if (option) { option.checked = true; if (fields('preference')) fields('preference').value = button.dataset.bagSelect; invalidatePrepared(); update(attempted); (fields('mode')?.value === 'assisted' ? fields('purpose') : option).focus({ preventScroll: true }); form.scrollIntoView({ block: 'start' }); }
   }));
+  document.querySelector('[data-clear-preference]')?.addEventListener('click', () => { fields('preference').value = ''; invalidatePrepared(); update(attempted); fields('purpose').focus(); });
+  document.querySelector('[data-edit-requirement]')?.addEventListener('click', () => {
+    if (manualBriefField) { let section = manualBriefField.closest('details'); while (section) { section.open = true; section = section.parentElement?.closest('details'); } manualBriefField.focus(); }
+    else { focusField(fields('mode')?.value === 'assisted' ? 'purpose' : 'bag'); form.scrollIntoView({ block: 'start' }); }
+  });
+  document.querySelectorAll('[name="pd-configuration"]').forEach(field => {
+    field.addEventListener('input', () => update(attempted));
+    // CF7 resets native fields after dispatching reset; keep the shared summary and brief in sync.
+    field.form?.addEventListener('reset', event => window.setTimeout(() => { if (!event.defaultPrevented) update(attempted); }, 0));
+  });
   document.querySelectorAll('[data-download-brief]').forEach(button => button.addEventListener('click', () => {
     const result = update(true);
     if (!result.valid) return;

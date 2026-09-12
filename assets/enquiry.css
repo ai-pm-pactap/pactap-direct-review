@@ -17,7 +17,7 @@
 .pd .pde label,.pd .pde legend { display:block; margin:0 0 9px; font-size:14px; font-weight:500; line-height:1.5; }
 .pd .pde label>span,.pd .pde legend>span { font-size:13px; color:#57655d; font-weight:400; }
 .pd .pde .pde-required { color:#246d4d; }
-.pd .pde input:not([type=checkbox]):not([type=submit]),.pd .pde select,.pd .pde textarea { width:100%; min-width:0; min-height:50px; margin:0; padding:13px 14px; border:1px solid #a3b5a9; border-radius:8px; background:#fff; color:#182d24; font:inherit; font-size:16px; line-height:1.5; }
+.pd .pde input:not([type=checkbox]):not([type=submit]),.pd .pde select,.pd .pde textarea { width:100%; min-width:0; min-height:50px; margin:0; padding:13px 14px; border:1px solid #829688; border-radius:8px; background:#fff; color:#182d24; font:inherit; font-size:16px; line-height:1.5; }
 .pd .pde input::placeholder,.pd .pde textarea::placeholder { color:#65766b; opacity:1; }
 .pd .pde textarea { height:132px; min-height:124px; resize:vertical; }
 .pd .pde input:focus,.pd .pde select:focus,.pd .pde textarea:focus { border-color:var(--action); outline:2px solid var(--action); outline-offset:2px; }
@@ -61,3 +61,13 @@
 .pd .pde-options>summary>span { color:#526557; font-size:12px; font-weight:400; }
 .pd .pde-options>summary::-webkit-details-marker { display:none; }
 .pd .pde-options>.pde-grid { padding:12px 0 24px; }
+.pd .pd-prepared-summary{padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid #c4d3c9}
+.pd-prepared-summary>strong{font-size:14px;font-weight:600;color:var(--ink)}
+.pd .pd-prepared-summary>p{margin-top:7px;font-size:14px;color:#40594a;overflow-wrap:anywhere}
+.pd-prepared-summary>button,.pd-preference-note>button{font:inherit;font-size:13px;color:var(--action);min-height:44px;background:none;border:0;padding:6px 0;text-align:left;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.pd .pd-preference-note{margin-top:12px;font-size:13px;color:#40594a;overflow-wrap:anywhere}
+.pd-preference-note>button{margin-left:12px}
+.pd .pd-quantity-help{margin:0;min-width:0}
+.pd-quantity-help>label{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;color:#40594a;cursor:pointer}
+.pd-quantity-help input{width:18px;height:18px;margin:0;accent-color:var(--action);flex-shrink:0}
+.pd #pd-quantity:disabled{background:#f0f4f1;color:#526557}
